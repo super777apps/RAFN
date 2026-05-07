@@ -8,7 +8,7 @@ const firebaseConfig = {
   apiKey: "AIzaSyBTHW7wIj19RZcCUMp27sViO07i32zLi3w",
   authDomain: "rafnaustralia-eee84.firebaseapp.com",
   projectId: "rafnaustralia-eee84",
-  storageBucket: "rafnaustralia-eee84.firebasestorage.app",
+  storageBucket: "rafnaustralia-eee84.appspot.com",
   messagingSenderId: "42403065720",
   appId: "1:42403065720:web:307018ce714ae2cecf628d"
 };
@@ -16,5 +16,5 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-// Export Firestore database
+// Firestore database
 export const db = getFirestore(app);

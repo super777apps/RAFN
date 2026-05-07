@@ -1,22 +1,16 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Admin Panel</title>
-</head>
-<body>
+<input id="name" placeholder="Name">
+<input id="category" placeholder="Category">
+<input id="subcategory" placeholder="Subcategory">
+<textarea id="description"></textarea>
 
-<h2>Add Product</h2>
+<input type="file" id="image">
 
-<input id="name" placeholder="Product Name"><br><br>
-<input id="category" placeholder="Category"><br><br>
-<input id="subcategory" placeholder="Subcategory"><br><br>
-<input id="image" placeholder="Image URL"><br><br>
 
-<textarea id="description" placeholder="Description"></textarea><br><br>
+<button onclick="saveProduct()">Save</button>
 
-<button onclick="saveProduct()">Save Product</button>
+
+<h3>Products</h3>
+<div id="adminList"></div>
+
 
 <script type="module" src="admin.js"></script>
-
-</body>
-</html>
