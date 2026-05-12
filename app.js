@@ -98,7 +98,15 @@ function renderProducts(products) {
 
       <input type="number" min="1" value="1" class="qty">
 
-      <p class="price">From $${getPrice(p.pricing, 1)}</p>
+
+<p class="pricingText">
+  ${
+    typeof p.pricing === "string"
+      ? p.pricing
+      : ""
+  }
+</p>
+
 
       <button class="buy">Buy on WhatsApp</button>
     `;
@@ -123,9 +131,8 @@ function renderProducts(products) {
 📦 Qty: ${q}
 💰 Price: ${pr}`;
 
-      window.open(
-        `https://wa.me/923XXXXXXXXX?text=${encodeURIComponent(msg)}`
-      );
+      window.location.href =
+  `https://wa.me/61400558676?text=${encodeURIComponent(msg)}`;
     };
 
     container.appendChild(div);
