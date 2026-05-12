@@ -84,61 +84,58 @@ function getPrice(pricing, qty = 1) {
 
 /* ===================== PRODUCT RENDER ===================== */
 function renderProducts(products) {
-  const container = document.getElementById("products");
+
+  const container =
+    document.getElementById("products");
+
   container.innerHTML = "";
 
   products.forEach(p => {
-    const div = document.createElement("div");
+
+    const div =
+      document.createElement("div");
+
     div.className = "card";
 
     div.innerHTML = `
       <img src="${p.image || ''}" />
+
       <h4>${p.name || ''}</h4>
+
       <p>${p.description || ''}</p>
 
-      <input type="number" min="1" value="1" class="qty">
+      <p class="pricingText">
+        ${
+          typeof p.pricing === "string"
+            ? p.pricing
+            : ""
+        }
+      </p>
 
-
-<p class="pricingText">
-  ${
-    typeof p.pricing === "string"
-      ? p.pricing
-      : ""
-  }
-</p>
-
-
-      <button class="buy">Buy on WhatsApp</button>
+      <button class="buy">
+        Buy on WhatsApp
+      </button>
     `;
 
-    const qty = div.querySelector(".qty");
-    const price = div.querySelector(".price");
-    const btn = div.querySelector(".buy");
+    const btn =
+      div.querySelector(".buy");
 
-    // live price update
-    qty.oninput = () => {
-      const q = parseInt(qty.value || 1);
-      price.innerText = "From $" + getPrice(p.pricing, q);
-    };
-
-    // whatsapp order
     btn.onclick = () => {
-      const q = parseInt(qty.value || 1);
-      const pr = getPrice(p.pricing, q);
 
       const msg =
-`🛍 Product: ${p.name}
-📦 Qty: ${q}
-💰 Price: ${pr}`;
+"Product: " + p.name +
+"\n\nHello, I want more information about this product.";
 
-      window.location.href =
-  `https://wa.me/61400558676?text=${encodeURIComponent(msg)}`;
+      const url =
+  "https://wa.me/61400558676?text=" +
+  encodeURIComponent(msg);
+
+window.open(url, "_blank");
     };
 
     container.appendChild(div);
   });
 }
-
 /* ===================== SIDEBAR MENU CONTROL ===================== */
 const menuBtn = document.getElementById("menuBtn");
 const sidebar = document.getElementById("sidebar");
