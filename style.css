@@ -94,11 +94,23 @@ body {
 
 /* ===== GRID ===== */
 /* ===== PRODUCT GRID ===== */
+
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;
   gap: 20px;
 }
+
+
+@media (min-width: 768px) {
+
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+
 
 /* ===== CARD ===== */
 .card {
@@ -108,13 +120,13 @@ body {
   border: 1px solid rgba(212,175,55,0.25);
 }
 
+
 .card img {
   width: 100%;
-  height: 180px;
-  object-fit: contain;   /* ✅ IMPORTANT (shows full image) */
-  background: #0a0a0a;   /* fills empty space nicely */
+  height: auto;
+  object-fit: contain;
   border-radius: 10px;
-  padding: 5px;
+  background: #000;
 }
 
 .card h4 {
@@ -187,4 +199,8 @@ body {
   color: #d4af37;
   margin-top: 8px;
   line-height: 1.5;
+}
+
+body {
+  overflow-x: hidden;
 }
