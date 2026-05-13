@@ -2,41 +2,125 @@
 <html>
 
 <head>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
   <title>Admin Panel</title>
 
-  <style>
-    body {
-      background: #0f0f0f;
-      color: white;
-      font-family: Arial;
-      padding: 20px;
-    }
+<style>
 
-    input,
-    textarea {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 10px;
-      background: #111;
-      color: white;
-      border: 1px solid gold;
-      border-radius: 8px;
-      box-sizing: border-box;
-    }
+* {
+  box-sizing: border-box;
+}
 
-    button {
-      background: gold;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 20px;
-      cursor: pointer;
-      font-weight: bold;
-    }
+body {
+  background: #0f0f0f;
+  color: white;
+  font-family: Arial, sans-serif;
+  padding: 15px;
+  margin: 0;
+  overflow-x: hidden;
+}
 
-    img {
-      max-width: 100%;
-    }
-  </style>
+/* heading */
+
+h2, h3 {
+  color: #d4af37;
+}
+
+/* inputs */
+
+input,
+textarea,
+button {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* text fields */
+
+input,
+textarea {
+
+  background: #111;
+  color: white;
+
+  border: 1px solid gold;
+
+  border-radius: 10px;
+
+  padding: 12px;
+
+  margin-bottom: 12px;
+
+  font-size: 16px;
+}
+
+/* textarea */
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* buttons */
+
+button {
+
+  background: linear-gradient(
+    45deg,
+    #d4af37,
+    #f5d76e
+  );
+
+  color: black;
+
+  border: none;
+
+  padding: 12px;
+
+  border-radius: 25px;
+
+  font-weight: bold;
+
+  font-size: 15px;
+
+  cursor: pointer;
+
+  margin-bottom: 10px;
+}
+
+/* product cards */
+
+#adminList > div {
+
+  width: 100%;
+
+  overflow: hidden;
+}
+
+/* images */
+
+#adminList img {
+
+  max-width: 100%;
+
+  height: auto;
+}
+
+/* desktop improvements */
+
+@media (min-width: 768px) {
+
+  body {
+    max-width: 700px;
+    margin: auto;
+  }
+
+}
+
+</style>
 </head>
 
 <body>
