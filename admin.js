@@ -140,25 +140,26 @@ async function saveProduct() {
 
 async function loadProducts() {
 
-  const q = query(
-  collection(db, "products"),
-  orderBy("createdAt", "asc")
-);
+  const snap = await getDocs(
+    collection(db, "products")
+  );
 
-const snap = await getDocs(q);
+  productsCache = snap.docs.map(d => ({
+    id: d.id,
+    ...d.data()
+  }));
 
-  productsCache =
-    snap.docs.map(d => ({
-      id: d.id,
-      ...d.data()
-    }));
+  productsCache.sort((a, b) => {
+    const ta = a.createdAt?.seconds || 0;
+    const tb = b.createdAt?.seconds || 0;
+    return ta - tb;
+  });
 
   filteredProducts = [...productsCache];
 
   renderAdminProducts(filteredProducts);
   loadDropdowns();
 }
-
 /* ================= RENDER PRODUCTS ================= */
 
 function renderAdminProducts(products) {
