@@ -172,9 +172,38 @@ body {
     gap: 16px;
   }
 
-  .card {
-    padding: 12px;
-  }
+
+.card {
+
+  background: #151515;
+
+  border: 1.5px solid rgba(212,175,55,0.45);
+
+  border-radius: 16px;
+
+  padding: 12px;
+
+  box-shadow:
+    0 0 8px rgba(212,175,55,0.08),
+    0 6px 18px rgba(0,0,0,0.6);
+
+  transition: all 0.25s ease;
+}
+
+.card:hover {
+
+  transform: translateY(-2px);
+
+  border-color: rgba(212,175,55,0.8);
+
+  box-shadow:
+    0 0 12px rgba(212,175,55,0.18),
+    0 8px 22px rgba(0,0,0,0.7);
+}
+
+
+  
+  
 
   .card img {
     height: 220px;
