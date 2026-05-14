@@ -6,7 +6,10 @@ import {
   getDocs,
   deleteDoc,
   doc,
-  updateDoc
+  updateDoc,
+serverTimestamp,
+query,
+orderBy
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 /* ================= CLOUDINARY ================= */
@@ -79,7 +82,8 @@ async function saveProduct() {
   subcategory,
   description,
   pricing,
-  image: imageUrl
+  image: imageUrl,
+  createdAt: serverTimestamp()
 };
   
   
@@ -136,8 +140,12 @@ async function saveProduct() {
 
 async function loadProducts() {
 
-  const snap =
-    await getDocs(collection(db, "products"));
+  const q = query(
+  collection(db, "products"),
+  orderBy("createdAt", "asc")
+);
+
+const snap = await getDocs(q);
 
   productsCache =
     snap.docs.map(d => ({
@@ -148,6 +156,7 @@ async function loadProducts() {
   filteredProducts = [...productsCache];
 
   renderAdminProducts(filteredProducts);
+  loadDropdowns();
 }
 
 /* ================= RENDER PRODUCTS ================= */
@@ -328,3 +337,57 @@ document.getElementById("saveBtn")
 /* ================= INIT ================= */
 
 loadProducts();
+
+function loadDropdowns() {
+
+  const catList =
+    document.getElementById("categoryList");
+
+  const subList =
+    document.getElementById("subcategoryList");
+
+  catList.innerHTML = "";
+  subList.innerHTML = "";
+
+  /* unique categories */
+
+  const cats =
+    [...new Set(
+      productsCache.map(p =>
+        p.category?.trim()
+      )
+    )];
+
+  cats.forEach(cat => {
+
+    if (!cat) return;
+
+    const option =
+      document.createElement("option");
+
+    option.value = cat;
+
+    catList.appendChild(option);
+  });
+
+  /* unique subcategories */
+
+  const subs =
+    [...new Set(
+      productsCache.map(p =>
+        p.subcategory?.trim()
+      )
+    )];
+
+  subs.forEach(sub => {
+
+    if (!sub) return;
+
+    const option =
+      document.createElement("option");
+
+    option.value = sub;
+
+    subList.appendChild(option);
+  });
+}

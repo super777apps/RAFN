@@ -129,9 +129,21 @@ button {
 
   <input id="name" placeholder="Product Name">
 
-  <input id="category" placeholder="Category">
+<input
+  id="category"
+  list="categoryList"
+  placeholder="Category"
+>
 
-  <input id="subcategory" placeholder="Subcategory">
+<datalist id="categoryList"></datalist>
+
+<input
+  id="subcategory"
+  list="subcategoryList"
+  placeholder="Subcategory"
+>
+
+<datalist id="subcategoryList"></datalist>
 
   <textarea
     id="description"
