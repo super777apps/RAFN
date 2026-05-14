@@ -102,15 +102,16 @@ function renderProducts(products) {
 
       <h4>${p.name || ''}</h4>
 
-      <p>${p.description || ''}</p>
+    
+ <div class="desc">
+  ${p.description || ''}
+</div>
 
-      <p class="pricingText">
-        ${
-          typeof p.pricing === "string"
-            ? p.pricing
-            : ""
-        }
-      </p>
+<div class="pricingText">${
+typeof p.pricing === "string"
+? p.pricing
+: ""
+}</div>
 
       <button class="buy">
         Buy on WhatsApp
