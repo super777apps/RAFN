@@ -6,6 +6,12 @@ import {
 
 let allProducts = [];
 
+let currentProducts = [];
+
+let currentPage = 1;
+
+const PRODUCTS_PER_PAGE = 10;
+
 /* ===================== LOAD DATA ===================== */
 async function loadData() {
   const snap = await getDocs(collection(db, "products"));
@@ -19,7 +25,11 @@ async function loadData() {
 
 
   renderCategories();
-  renderProducts(allProducts);
+  currentProducts = allProducts;
+
+currentPage = 1;
+
+renderProducts(currentProducts);
 }
 
 /* ===================== CATEGORY SIDEBAR ===================== */
@@ -57,7 +67,11 @@ function renderCategories() {
         const filtered = allProducts.filter(
           p => p.category === cat && p.subcategory === sub
         );
-        renderProducts(filtered);
+        currentProducts = filtered;
+
+currentPage = 1;
+
+renderProducts(currentProducts);
 
         // close sidebar after click (mobile UX)
         closeSidebar();
@@ -88,9 +102,20 @@ function renderProducts(products) {
   const container =
     document.getElementById("products");
 
+  /* IMPORTANT */
   container.innerHTML = "";
 
-  products.forEach(p => {
+  const start =
+    (currentPage - 1) *
+    PRODUCTS_PER_PAGE;
+
+  const end =
+    start + PRODUCTS_PER_PAGE;
+
+  const paginatedProducts =
+    products.slice(start, end);
+
+  paginatedProducts.forEach(p => {
 
     const div =
       document.createElement("div");
@@ -102,16 +127,17 @@ function renderProducts(products) {
 
       <h4>${p.name || ''}</h4>
 
-    
- <div class="desc">
-  ${p.description || ''}
-</div>
+      <div class="desc">
+        ${p.description || ''}
+      </div>
 
-<div class="pricingText">${
-typeof p.pricing === "string"
-? p.pricing
-: ""
-}</div>
+      <div class="pricingText">
+        ${
+          typeof p.pricing === "string"
+            ? p.pricing
+            : ""
+        }
+      </div>
 
       <button class="buy">
         Buy on WhatsApp
@@ -124,18 +150,88 @@ typeof p.pricing === "string"
     btn.onclick = () => {
 
       const msg =
-"Product: " + p.name +
-"\n\nHello, I want more information about this product.";
+        "Product: " + p.name +
+        "\n\nHello, I want more information about this product.";
 
       const url =
-  "https://wa.me/61400558676?text=" +
-  encodeURIComponent(msg);
+        "https://wa.me/61400558676?text=" +
+        encodeURIComponent(msg);
 
-window.open(url, "_blank");
+      window.open(url, "_blank");
     };
 
     container.appendChild(div);
   });
+
+  /* ===== PAGINATION ===== */
+
+  const totalPages =
+    Math.ceil(
+      products.length /
+      PRODUCTS_PER_PAGE
+    );
+
+  if (totalPages > 1) {
+
+    const nav =
+      document.createElement("div");
+
+    nav.className = "pagination";
+
+    nav.innerHTML = `
+      <button id="prevPage"
+        ${currentPage === 1 ? "disabled" : ""}>
+        Previous
+      </button>
+
+      <span>
+        Page ${currentPage}
+        of
+        ${totalPages}
+      </span>
+
+      <button id="nextPage"
+        ${currentPage === totalPages ? "disabled" : ""}>
+        Next
+      </button>
+    `;
+
+    container.appendChild(nav);
+
+    document.getElementById("prevPage")
+      .onclick = () => {
+
+      if (currentPage > 1) {
+
+        currentPage--;
+
+        renderProducts(products);
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+      }
+    };
+
+    document.getElementById("nextPage")
+      .onclick = () => {
+
+      if (
+        currentPage < totalPages
+      ) {
+
+        currentPage++;
+
+        renderProducts(products);
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+      }
+    };
+  }
 }
 /* ===================== SIDEBAR MENU CONTROL ===================== */
 const menuBtn = document.getElementById("menuBtn");
