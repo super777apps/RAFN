@@ -113,16 +113,20 @@ body {
 
 .sidebar h3 {
   color: #d4af37;
-  font-size: 15px;
-  margin: 10px 0;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 14px 0;
   cursor: pointer;
+  letter-spacing: 0.5px;
 }
 
+
 .sidebar div div {
-  padding: 6px 0;
+  padding: 8px 0;
   color: #ccc;
-  cursor: pointer;
+  font-size: 15px;
 }
+
 
 /* ===== MAIN ===== */
 .main {
