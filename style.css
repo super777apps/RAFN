@@ -325,3 +325,11 @@ body {
 
   cursor: pointer;
 }
+
+#backBtn {
+  background: none;
+  border: none;
+  color: #d4af37;
+  font-size: 22px;
+  cursor: pointer;
+}

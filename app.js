@@ -34,46 +34,91 @@ renderProducts(currentProducts);
 
 /* ===================== CATEGORY SIDEBAR ===================== */
 function renderCategories() {
-  const sidebar = document.getElementById("sidebar");
+
+  const sidebar =
+    document.getElementById("sidebar");
+
   sidebar.innerHTML = "";
 
-  const cats = [...new Set(allProducts.map(p => p.category))];
+  /* ===== PDF BUTTON ===== */
 
-  cats.forEach(cat => {
-    const catDiv = document.createElement("div");
+  const pdfDiv =
+    document.createElement("div");
 
-    const subs = [...new Set(
-      allProducts
-        .filter(p => p.category === cat)
-        .map(p => p.subcategory)
+  pdfDiv.innerHTML = `
+    <h3 class="pdfTitle">
+      📥 Download Catalogs
+    </h3>
+  `;
+
+  pdfDiv.onclick = () => {
+    window.location = "catalogs.html";
+  };
+
+  sidebar.appendChild(pdfDiv);
+
+  /* ===== NORMAL CATEGORIES ===== */
+
+  const cats =
+    [...new Set(
+      allProducts.map(p => p.category)
     )];
 
-    catDiv.innerHTML = `<h3>${cat}</h3>`;
+  cats.forEach(cat => {
 
-    const subBox = document.createElement("div");
+    const catDiv =
+      document.createElement("div");
+
+    const subs =
+      [...new Set(
+        allProducts
+          .filter(p => p.category === cat)
+          .map(p => p.subcategory)
+      )];
+
+    catDiv.innerHTML = `
+      <h3>${cat}</h3>
+    `;
+
+    const subBox =
+      document.createElement("div");
+
     subBox.style.display = "none";
     subBox.style.paddingLeft = "10px";
 
-    catDiv.querySelector("h3").onclick = () => {
-      subBox.style.display = subBox.style.display === "none" ? "block" : "none";
+    catDiv.querySelector("h3")
+      .onclick = () => {
+
+      subBox.style.display =
+        subBox.style.display === "none"
+        ? "block"
+        : "none";
     };
 
     subs.forEach(sub => {
-      const s = document.createElement("div");
+
+      const s =
+        document.createElement("div");
+
       s.innerText = "→ " + sub;
+
       s.style.cursor = "pointer";
 
       s.onclick = () => {
-        const filtered = allProducts.filter(
-          p => p.category === cat && p.subcategory === sub
-        );
+
+        const filtered =
+          allProducts.filter(
+            p =>
+              p.category === cat &&
+              p.subcategory === sub
+          );
+
         currentProducts = filtered;
 
-currentPage = 1;
+        currentPage = 1;
 
-renderProducts(currentProducts);
+        renderProducts(currentProducts);
 
-        // close sidebar after click (mobile UX)
         closeSidebar();
       };
 
@@ -81,10 +126,10 @@ renderProducts(currentProducts);
     });
 
     catDiv.appendChild(subBox);
+
     sidebar.appendChild(catDiv);
   });
 }
-
 /* ===================== PRICE LOGIC ===================== */
 function getPrice(pricing, qty = 1) {
   if (!pricing) return 0;
