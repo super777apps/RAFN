@@ -14,7 +14,7 @@ const PRODUCTS_PER_PAGE = 10;
 
 /* ===================== LOAD DATA ===================== */
 async function loadData() {
-  const snap = await getDocs(collection(db, "products"));
+  const snap = await getDocs(collection(db, "products_leather"));
   
   
   allProducts = snap.docs.map(d => ({
@@ -40,22 +40,6 @@ function renderCategories() {
 
   sidebar.innerHTML = "";
 
-
-
-
-const contactBtn =
-document.createElement("div");
-
-contactBtn.innerHTML = `
-<h3 onclick="window.location='contact.html'">
-📞 Contact Us
-</h3>
-`;
-
-sidebar.appendChild(contactBtn);
-
-
-
   /* ===== PDF BUTTON ===== */
 
   const pdfDiv =
@@ -72,6 +56,22 @@ sidebar.appendChild(contactBtn);
   };
 
   sidebar.appendChild(pdfDiv);
+
+
+
+
+const contactBtn =
+document.createElement("div");
+
+contactBtn.innerHTML = `
+<h3 onclick="window.location='contact.html'">
+📞 Contact Us
+</h3>
+`;
+
+sidebar.appendChild(contactBtn);
+
+
 
   /* ===== NORMAL CATEGORIES ===== */
 
