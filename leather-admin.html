@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Admin Panel</title>
+
+<style>
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: #0f0f0f;
+  color: white;
+  font-family: Arial, sans-serif;
+  padding: 15px;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+/* heading */
+
+h2, h3 {
+  color: #d4af37;
+}
+
+/* inputs */
+
+input,
+textarea,
+button {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* text fields */
+
+input,
+textarea {
+
+  background: #111;
+  color: white;
+
+  border: 1px solid gold;
+
+  border-radius: 10px;
+
+  padding: 12px;
+
+  margin-bottom: 12px;
+
+  font-size: 16px;
+}
+
+/* textarea */
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* buttons */
+
+button {
+
+  background: linear-gradient(
+    45deg,
+    #d4af37,
+    #f5d76e
+  );
+
+  color: black;
+
+  border: none;
+
+  padding: 12px;
+
+  border-radius: 25px;
+
+  font-weight: bold;
+
+  font-size: 15px;
+
+  cursor: pointer;
+
+  margin-bottom: 10px;
+}
+
+/* product cards */
+
+#adminList > div {
+
+  width: 100%;
+
+  overflow: hidden;
+}
+
+/* images */
+
+#adminList img {
+
+  max-width: 100%;
+
+  height: auto;
+}
+
+/* desktop improvements */
+
+@media (min-width: 768px) {
+
+  body {
+    max-width: 700px;
+    margin: auto;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+  <h2>Admin Panel</h2>
+
+  <input id="name" placeholder="Product Name">
+
+<input
+  id="category"
+  list="categoryList"
+  placeholder="Category"
+>
+
+<datalist id="categoryList"></datalist>
+
+<input
+  id="subcategory"
+  list="subcategoryList"
+  placeholder="Subcategory"
+>
+
+<datalist id="subcategoryList"></datalist>
+
+  <textarea
+    id="description"
+    placeholder="Description"
+  ></textarea>
+  
+  
+  <textarea
+  id="pricing"
+  placeholder="Pricing tiers...
+1-10 pcs = $10
+11-100 pcs = $8
+101-1000 pcs = $6"
+></textarea>
+  
+
+
+  <input type="file" id="image">
+
+  <!-- IMPORTANT -->
+  <button id="saveBtn">
+    Add Product
+  </button>
+
+  <hr>
+
+<input
+  id="searchInput"
+  placeholder="Search products..."
+
+
+
+
+  <h3>Products</h3>
+
+  <div id="adminList"></div>
+
+  <script type="module" src="leather-admin.js"></script>
+
+</body>
+</html>
