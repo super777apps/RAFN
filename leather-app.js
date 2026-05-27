@@ -73,6 +73,20 @@ sidebar.appendChild(contactBtn);
 
 
 
+const certBtn =
+document.createElement("div");
+
+certBtn.innerHTML = `
+<h3 onclick="
+window.location='certifications.html'">
+🏅 Certifications
+</h3>
+`;
+
+sidebar.appendChild(certBtn);
+
+
+
   /* ===== NORMAL CATEGORIES ===== */
 
   const cats =
