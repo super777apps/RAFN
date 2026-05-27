@@ -19,6 +19,9 @@ const UPLOAD_PRESET = "ml_default";
 
 /* ================= VARIABLES ================= */
 
+let currentPage = 1;
+const PRODUCTS_PER_PAGE = 20;
+
 let editId = null;
 let productsCache = [];
 let filteredProducts = [];
@@ -157,10 +160,17 @@ async function loadProducts() {
 
   filteredProducts = [...productsCache];
 
-  renderAdminProducts(filteredProducts);
+  
+  currentPage = 1;
+renderAdminProducts(filteredProducts);
+  
+  
+  
   loadDropdowns();
 }
 /* ================= RENDER PRODUCTS ================= */
+
+
 
 function renderAdminProducts(products) {
 
@@ -169,7 +179,17 @@ function renderAdminProducts(products) {
 
   container.innerHTML = "";
 
-  products.forEach(p => {
+  const start =
+    (currentPage - 1) *
+    PRODUCTS_PER_PAGE;
+
+  const end =
+    start + PRODUCTS_PER_PAGE;
+
+  const paginatedProducts =
+    products.slice(start, end);
+
+  paginatedProducts.forEach(p => {
 
     const div =
       document.createElement("div");
@@ -220,22 +240,77 @@ function renderAdminProducts(products) {
       </button>
     `;
 
-    /* EDIT */
     div.querySelector(".editBtn")
       .onclick = () => {
         editProduct(p.id);
       };
 
-    /* DELETE */
     div.querySelector(".deleteBtn")
       .onclick = () => {
         deleteProduct(p.id);
       };
 
     container.appendChild(div);
-  });
-}
 
+  });
+
+  const totalPages =
+    Math.ceil(
+      products.length /
+      PRODUCTS_PER_PAGE
+    );
+
+  if (totalPages > 1) {
+
+    const nav =
+      document.createElement("div");
+
+    nav.style.textAlign = "center";
+    nav.style.marginTop = "20px";
+
+    nav.innerHTML = `
+      <button id="adminPrev"
+      ${currentPage === 1 ? "disabled" : ""}>
+      Previous
+      </button>
+
+      <span style="margin:0 10px;">
+      Page ${currentPage}
+      of
+      ${totalPages}
+      </span>
+
+      <button id="adminNext"
+      ${currentPage === totalPages ? "disabled" : ""}>
+      Next
+      </button>
+    `;
+
+    container.appendChild(nav);
+
+    document.getElementById("adminPrev")
+      .onclick = () => {
+
+      if (currentPage > 1) {
+
+        currentPage--;
+
+        renderAdminProducts(products);
+      }
+    };
+
+    document.getElementById("adminNext")
+      .onclick = () => {
+
+      if (currentPage < totalPages) {
+
+        currentPage++;
+
+        renderAdminProducts(products);
+      }
+    };
+  }
+}
 /* ================= DELETE ================= */
 
 async function deleteProduct(id) {
@@ -392,3 +467,4 @@ function loadDropdowns() {
     subList.appendChild(option);
   });
 }
+
