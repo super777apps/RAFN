@@ -331,3 +331,47 @@ overlay.onclick = closeSidebar;
 
 /* ===================== INIT ===================== */
 loadData();
+
+
+document.addEventListener("input", (e) => {
+
+  if (e.target.id !== "searchInput")
+    return;
+
+  const value =
+    e.target.value.toLowerCase().trim();
+
+  const filtered =
+    allProducts.filter(p =>
+
+      (p.name || "")
+        .toLowerCase()
+        .includes(value)
+
+      ||
+
+      (p.description || "")
+        .toLowerCase()
+        .includes(value)
+
+      ||
+
+      (p.category || "")
+        .toLowerCase()
+        .includes(value)
+
+      ||
+
+      (p.subcategory || "")
+        .toLowerCase()
+        .includes(value)
+
+    );
+
+  currentProducts = filtered;
+
+  currentPage = 1;
+
+  renderProducts(currentProducts);
+
+});
