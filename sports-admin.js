@@ -95,7 +95,7 @@ async function saveProduct() {
   if (editId) {
 
     await updateDoc(
-      doc(db, "products_leather", editId),
+      doc(db, "products_sports", editId),
       data
     );
 
@@ -110,9 +110,9 @@ async function saveProduct() {
 
     /* ADD */
     await addDoc(
-      collection(db, "products_leather"),
-      data
-    );
+  collection(db, "products_sports"),
+  data
+);
 
     alert("Product Added!");
   }
@@ -144,7 +144,7 @@ async function saveProduct() {
 async function loadProducts() {
 
   const snap = await getDocs(
-    collection(db, "products_leather")
+    collection(db, "products_sports")
   );
 
   productsCache = snap.docs.map(d => ({
@@ -318,8 +318,8 @@ async function deleteProduct(id) {
   if (confirm("Delete this product?")) {
 
     await deleteDoc(
-      doc(db, "products_leather", id)
-    );
+  doc(db, "products_sports", id)
+);
 
     loadProducts();
   }

@@ -14,7 +14,7 @@ const PRODUCTS_PER_PAGE = 10;
 
 /* ===================== LOAD DATA ===================== */
 async function loadData() {
-  const snap = await getDocs(collection(db, "products"));
+  const snap = await getDocs(collection(db, "products_sports"));
   
   
   allProducts = snap.docs.map(d => ({
@@ -178,7 +178,7 @@ function getPrice(pricing, qty = 1) {
 function renderProducts(products) {
 
   const container =
-    document.getElementById("products");
+    document.getElementById("products_sports");
 
   /* IMPORTANT */
   container.innerHTML = "";
