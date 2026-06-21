@@ -52,7 +52,7 @@ function renderCategories() {
   `;
 
   pdfDiv.onclick = () => {
-    window.location = "catalogs.html";
+    window.location = "leather-catalogs.html";
   };
 
   sidebar.appendChild(pdfDiv);
